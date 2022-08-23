@@ -5,10 +5,7 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -98,8 +95,23 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+
         // TODO - implement this method
-        return null;
+        for (HashMap<String, String> row : allJobs) {
+            //go thru each column in row
+            for (Map.Entry<String, String> entry : row.entrySet()) {
+                String jobValue = entry.getValue();
+                // if jobValue contains value, row is stored in jobs
+                // if jobValue contains value, stop the loop
+                if (jobValue.toLowerCase().contains(value.toLowerCase())) {
+                    jobs.add(row);
+                    break;
+                }
+            }
+        }
+
+        return jobs;
     }
 
     /**
@@ -122,6 +134,10 @@ public class JobData {
             String[] headers = parser.getHeaderMap().keySet().toArray(new String[numberOfColumns]);
 
             allJobs = new ArrayList<>();
+                                           // shelf     book    key     value
+            //private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
+
+                //System.out.println("printJobs is not implemented yet");
 
             // Put the records into a more friendly format
             for (CSVRecord record : records) {

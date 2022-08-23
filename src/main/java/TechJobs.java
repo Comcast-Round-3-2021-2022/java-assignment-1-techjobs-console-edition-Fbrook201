@@ -117,9 +117,20 @@ public class TechJobs {
         return choiceKeys[choiceIdx];
     }
 
-    // Print a list of jobs
+    // Print a list of jobs         shelf   books    key    value
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
+        // we should print no results only if someJobs is empty
+        if (someJobs.size() == 0) {
+            System.out.print("No Results");
+        }
 
-        System.out.println("printJobs is not implemented yet");
+        for (HashMap<String, String> job : someJobs) {
+            System.out.println("\n*****");
+            for (Map.Entry<String, String> entry : job.entrySet()) {
+
+                System.out.println(entry.getKey() + ": " + entry.getValue());
+            }
+            System.out.println("*****");
+        }
     }
 }
